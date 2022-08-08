@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        footer {
+            margin-top: 100px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        footer .txt {
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            box-sizing: border-box;
+            justify-content: space-between;
+        }
+        footer p{
+            width: 45%;
+        }
+        footer p span{
+            font-weight: 900;
+            font-size: 1.5em;
+        }
+
+
+
+        footer .googleMap {
+            width: 50%;
+            display: flex;
+        }
+
+        footer iframe {
+            width: 80%;
+            margin: auto;
+            height: 300px;
+            border: 0;
+        }
+        footer .lastText{
+            width: 100%;
+            text-align: center;
+            margin: 30px;
+            font-size: 20px;
+        }
+
+        @media screen and (max-width:768px) {
+            footer .txt,
+            footer p,
+            footer .googleMap,
+            footer iframe{
+                width: 100%;
+                padding: 10px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <footer>
+        <div class="txt">
+            <p><span>地址:</span><br>500台灣彰化縣彰化市八卦山</p>
+            <p><span>聯絡方式:</span><br>LineID:rick851031<br>
+                電子郵件:rick851031@gmail.com<br>
+            </p>
+            <p><span>待填:</span><br>還沒想到要打什麼，先空著</p>
+            <p><span>問題回報:</span><br>
+                以上聯絡方式為此網頁製作者，如有問題或建議請使用上述方式聯繫。
+            </p>
+        </div>
+        <div class="googleMap">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3642.6410184631586!2d120.549137!3d24.078943!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xca9b94a467e37772!2zMjTCsDA0JzQzLjMiTiAxMjDCsDMyJzU2LjAiRQ!5e0!3m2!1szh-TW!2sus!4v1657032337331!5m2!1szh-TW!2sus"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="lastText">本站為網頁練習作品，資料為網路查找資源及虛構拼湊而成，如有違法或侵害到他人權益請聯絡我。</div>
+    </footer>
+</body>
+
+</html>

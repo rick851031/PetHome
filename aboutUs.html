@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於我們</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="icon" href="images/標題icon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carouselPet {
+            margin-top: 10px;
+            width: 100%;
+            margin: auto;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carouselPet .img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            right: -100%;
+
+        }
+
+        .carouselPet .img.right {
+            right: -100%;
+            transition: right .6s;
+        }
+
+        .carouselPet .img.active {
+            right: 0%;
+            transition: .6s;
+        }
+
+        .carouselPet .img.left {
+            right: 100%;
+
+        }
+
+        .carouselPet .img.left2 {
+            right: 100%;
+            transition: right .6s;
+        }
+
+        .carouselPet .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding-bottom: 0;
+        }
+
+        .carouselPet .txt {
+            text-align: center;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-shadow: 1px 1px 1px #fff;
+        }
+
+        .carouselPet .span {
+            height: 14px;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 5px;
+            margin: auto;
+
+        }
+
+        .carouselPet span {
+            width: 10px;
+            height: 10px;
+            margin-left: 5px;
+            border: 2px solid rgb(255, 181, 44);
+            border-radius: 50%;
+            background-color: #777;
+            cursor: pointer;
+
+        }
+
+        .carouselPet span.active,
+        .carouselPet span:hover {
+            background-color: orange;
+        }
+
+        .carouselPet .prev,
+        .carouselPet .next {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 2.5em;
+            background-color: rgba(100, 100, 100, .6);
+            color: white;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+
+        }
+
+        .carouselPet .prev {
+            cursor: pointer;
+            left: 5%;
+        }
+
+        .carouselPet .next {
+            cursor: pointer;
+            right: 5%;
+        }
+
+        .carouselPet .prev:hover,
+        .carouselPet .next:hover {
+            background-color: rgba(0, 0, 0, .6);
+        }
+
+        .content {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .content h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            text-indent: 2em;
+        }
+
+        .numbers {
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            margin: auto;
+        }
+
+        .number>h1 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .numbers .item {
+            width: 250px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            padding-bottom: 15px;
+            border: 1px solid black;
+            background-color: #fff;
+            transform: translateY(0);
+            transition: .5s;
+        }
+
+        .numbers .item img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .numbers .item .txt {
+            position: relative;
+            text-align: center;
+            padding-left: 20px;
+            padding-right: 20px;
+            font-weight: 900;
+        }
+
+        .numbers .active .txt:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 0;
+            top: 0;
+            border-top: 32px solid transparent;
+            border-left: 125px solid #fff;
+            border-right: 125px solid #fff;
+            transform: translateY(-31px);
+        }
+
+        .numbers h2 {
+            margin: 0;
+        }
+
+        .numbers .icon {
+            padding-bottom: 3px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid black;
+
+        }
+
+        .numbers .icon i::before {
+            font-size: 30px;
+            display: block;
+            width: 30px;
+            opacity: .8;
+            padding: 3px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+        }
+
+        .numbers .active a:nth-child(1) {
+            color: rgba(24, 119, 242);
+        }
+
+        .numbers .active a:nth-child(2) {
+            color: rgba(225, 48, 108);
+        }
+
+        .numbers .active a:nth-child(3) {
+            color: rgba(0, 195, 0);
+        }
+
+        .numbers a {
+            color: #777;
+        }
+
+        .numbers .txt p {
+            font-size: 16px;
+            line-height: 1.2;
+        }
+
+        .numbers .item.active:hover {
+            transform: translateY(-5%);
+            background-image: linear-gradient(0deg, #FB8076 50%, #FEB85D 50%);
+            color: white;
+        }
+
+        .numbers .item.active:hover .txt {
+            background-image: linear-gradient(0deg, #FB8076, #FEB85D);
+
+        }
+
+        .numbers .item.active:hover .txt:before {
+            border-left: 125px solid #FEB85D;
+            border-right: 125px solid #FEB85D;
+        }
+
+        .numbers .active a:hover i::before {
+            opacity: 1;
+            border-color: #888;
+        }
+
+        .numbers .item.active:hover .icon {
+            border-color: white;
+        }
+
+
+
+        @media screen and (max-width:768px) {
+            .carouselPet .txt h2 {
+                font-size: 16px;
+            }
+
+            .carouselPet .txt p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav"></div>
+    <div class="carouselPet">
+        <div class="img active">
+            <img src="images/img03.jpg">
+            <div class="txt">
+                <h2>狗狗的生活</h2>
+                <p>優閒的下午時光</p>
+            </div>
+        </div>
+        <div class="img">
+            <img src="images/img02.jpg">
+            <div class="txt">
+                <h2>環境介紹</h2>
+                <p>寬敞的生活空間</p>
+            </div>
+        </div>
+        <div class="img">
+            <img src="images/img01.jpg">
+            <div class="txt">
+                <h2>優秀的志工團隊</h2>
+                <p>志工們正在替狗狗檢查身體</p>
+            </div>
+        </div>
+
+        <div class="span">
+            <span class="active"></span><span></span><span></span>
+        </div>
+        <div class="prev">﹤</div>
+        <div class="next">﹥</div>
+    </div>
+    <div class="content">
+        <h1>我們的理念</h1>
+        <p>
+            根據內政部與農委會統計，全台貓狗數量在2021年已達到295萬隻，首度超過台灣0~14歲的幼年人口數289萬，相當於寵物以每2.4分鐘的速度成為台灣新家庭的成員，每10人中就有1人家中有寵物，但全台收容所的貓狗收容量數量已到達118774隻，許多收容所都超出該收容單位能照顧的數量，政府從2014~2020年底補助經費為20.9億元，希望製作此網站來宣導『領養代替購買』的口號。
+        </p>
+    </div>
+
+    <div class="number">
+        <h1>我們的成員</h1>
+        <div class="numbers">
+            <div class="item active">
+                <img src="images/rick.jpg" alt="">
+                <div class="txt">
+                    <h2>陳建欣</h2>
+                    <div class="icon">
+                        <a href="https://www.facebook.com/profile.php?id=100007031169495" target="_blank"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/rick851031/" target="_blank"><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="https://line.me/ti/p/KzkwZeieeg" target="_blank"><i class="fa-brands fa-line"></i></a>
+                    </div>
+                    <p>彰化縣人，85年出生。 <br>
+                        雖然覺得狗狗很可愛，但其實有點怕狗。</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pic"><img src="images/boy.png" alt=""></div>
+                <div class="txt">
+                    <h2>沒有成員</h2>
+                    <div class="icon">
+                        <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-line"></i></a>
+                    </div>
+                    <p>無</p>
+                </div>
+
+            </div>
+            <div class="item">
+                <div class="pic"><img src="images/boy.png" alt=""></div>
+                <div class="txt">
+                    <h2>沒有成員</h2>
+                    <div class="icon">
+                        <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-line"></i></a>
+                        </a>
+                    </div>
+                    <p>無</p>
+                </div>
+
+            </div>
+            <div class="item">
+                <div class="pic"><img src="images/boy.png" alt=""></div>
+                <div class="txt">
+                    <h2>沒有成員</h2>
+                    <div class="icon">
+                        <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-line"></i></a>
+                    </div>
+                    <p>無</p>
+                </div>
+
+            </div>
+            <i></i><i></i>
+        </div>
+    </div>
+    <div class="footer"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4998ce33ce.js" crossorigin="anonymous"></script>
+    <script>
+
+        cp01()
+        function cp01() {
+            //輪播圖片物件
+            var carouselPet = document.getElementsByClassName('carouselPet')[0];
+            var imgH = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('active')[0];
+            var divImg = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('img');
+            var spans = document.getElementsByClassName('carouselPet')[0].getElementsByTagName('span');
+            var prev = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('prev')[0];
+            var next = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('next')[0];
+            //輪播圖片高度
+            var x = imgH.clientWidth;
+            carouselPet.style.height = x * 3 / 8 + 'px';
+            function carouselPetImg() {
+                x = imgH.clientWidth;
+                carouselPet.style.height = x * 3 / 8 + 'px';
+            }
+            window.addEventListener('resize', carouselPetImg);
+
+
+            //點擊圓點更換圖片
+            for (i = 0; i < divImg.length; i++) {
+                spans[i].index = i;
+                divImg[i].index = i;
+                spans[i].onclick = function () {
+                    for (j = 0; j < spans.length; j++) {
+                        if (divImg[j].index < this.index && divImg[j].className != 'img active') {
+                            divImg[j].className = 'img left';
+                        } else if (divImg[j].index > this.index && divImg[j].className != 'img active') {
+                            divImg[j].className = 'img';
+                        } else if (divImg[j].index < this.index) {
+                            divImg[j].className = 'img left2';
+                        } else if (divImg[j].index > this.index) {
+                            divImg[j].className = 'img right';
+                        }
+                        spans[j].className = '';
+                    }
+                    var num = this.index;
+                    divImg[num].className = 'img active';
+                    spans[num].className = 'active';
+                }
+            }
+
+            //點擊左右更換圖片
+            next.onclick = function nextClick() {
+                next.onclick = '';
+                for (i = 0; i < spans.length; i++) {
+                    if (spans[i].className == 'active') {
+                        if (i >= spans.length - 1) {
+                            divImg[0].className = 'img';
+                            setTimeout(function () {
+                                divImg[0].classList.add('active');
+                            }, 0);
+                            divImg[divImg.length - 1].className = 'img left2';
+                            spans[spans.length - 1].className = '';
+                            spans[0].className = 'active';
+                            setTimeout(function () { spans[0].click(); }, 600);
+                        } else {
+                            spans[i + 1].onclick();
+                            i++;
+                        }
+                    }
+                }
+
+                setTimeout(function () {
+                    next.onclick = nextClick;
+                }, 600)
+
+            }
+
+            prev.onclick = function prevClick() {
+                prev.onclick = '';
+                for (i = spans.length - 1; i > -1; i--) {
+                    if (spans[i].className == 'active') {
+                        if (i == 0) {
+                            divImg[0].className = 'img right';
+                            divImg[divImg.length - 1].className = 'img left';
+                            setTimeout(function () { divImg[divImg.length - 1].className = 'img active'; }, 0)
+                            spans[0].className = '';
+                            spans[spans.length - 1].className = 'active';
+                            setTimeout(function () { spans[spans.length - 1].click(); }, 600);
+                        } else {
+                            spans[i - 1].onclick();
+                            i--;
+                        }
+                    }
+                }
+                setTimeout(function () {
+                    prev.onclick = prevClick;
+                }, 600)
+            }
+
+            //自動輪播效果
+            function autocCarouselPet() {
+                next.click();
+            }
+            var autoCarousel = setInterval(autocCarouselPet, 3000);
+            carouselPet.onmouseover = function () {
+                clearInterval(autoCarousel);
+            }
+            carouselPet.onmouseout = function () {
+                autoCarousel = setInterval(autocCarouselPet, 3000);
+            }
+        }
+        $(".nav").load("nav.html");
+        $(".footer").load("footer.html");
+    </script>
+</body>
+
+</html>

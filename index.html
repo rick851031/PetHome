@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寵物之家</title>
+    <link rel="icon" href="images/標題icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/nav.css">
+    <style>
+        header,
+        .headerImg {
+            width: 100%;
+            height: 500px;
+            display: flex;
+        }
+
+        header .headerImg {
+            width: 100%;
+            height: 500px;
+            position: fixed;
+            z-index: -1;
+        }
+
+        header .headerImg img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        header .txt {
+            width: auto;
+            align-self: center;
+            margin-left: 20px;
+            text-shadow: 2px 2px 2px #fff;
+        }
+
+        header a {
+            background-color: rgba(101, 146, 230);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 15px;
+            text-decoration: none;
+            text-shadow: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        header a:hover {
+            background-color: rgb(43, 111, 238);
+        }
+
+        @media screen and (max-width:768px) {
+            header .txt {
+                align-self: flex-end;
+                margin-bottom: 20px;
+                color: #fff;
+                text-shadow: 2px 2px 2px #000;
+            }
+        }
+
+        .carouselPet {
+            margin-top: 10px;
+            width: 80%;
+            margin: auto;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carouselPet .img {
+            width: 60%;
+            height: 100%;
+            position: absolute;
+            right: -80%;
+
+        }
+
+        .carouselPet .img.right {
+            right: -80%;
+            transition: right .6s;
+        }
+
+        .carouselPet .img.active {
+            right: 20%;
+            transition: .6s;
+        }
+
+        .carouselPet .img.left {
+            right: 120%;
+
+        }
+
+        .carouselPet .img.left2 {
+            right: 120%;
+            transition: right .6s;
+        }
+
+        .carouselPet .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            padding-bottom: 0;
+        }
+
+        .carouselPet .txt {
+            text-align: center;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-shadow: 1px 1px 1px #fff;
+        }
+
+        .carouselPet .span {
+            height: 14px;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 5px;
+            margin: auto;
+
+        }
+
+        .carouselPet span {
+            width: 10px;
+            height: 10px;
+            margin-left: 5px;
+            border: 2px solid rgb(255, 181, 44);
+            border-radius: 50%;
+            background-color: #777;
+            cursor: pointer;
+
+        }
+
+        .carouselPet span.active,
+        .carouselPet span:hover {
+            background-color: orange;
+        }
+
+        .carouselPet .prev,
+        .carouselPet .next {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 2.5em;
+            background-color: rgba(100, 100, 100, .6);
+            color: white;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+
+        }
+
+        .carouselPet .prev {
+            cursor: pointer;
+            left: 5%;
+        }
+
+        .carouselPet .next {
+            cursor: pointer;
+            right: 5%;
+        }
+
+        .carouselPet .prev:hover,
+        .carouselPet .next:hover {
+            background-color: rgba(0, 0, 0, .6);
+        }
+
+        @media screen and (max-width:960px) {
+            .carouselPet .img {
+                width: 80%;
+            }
+
+            .carouselPet .img.right {
+                right: -90%;
+            }
+
+            .carouselPet .img.active {
+                right: 10%;
+            }
+
+            .carouselPet .img.left,
+            .carouselPet .img.left2 {
+                right: 110%;
+            }
+        }
+
+
+        .petPhoto {
+            width: 80%;
+            margin: auto;
+            margin-bottom: 100px;
+            margin-top: 50px;
+        }
+
+        .petPhoto .imgBox {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .petPhoto .img {
+            width: 20%;
+            margin: 0 2.5%;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .petPhoto .img img {
+            width: 100%;
+        }
+
+        .petPhoto .img i {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 50px;
+            height: 50px;
+            opacity: 0;
+            font-size: 25px;
+            line-height: 50px;
+            text-align: center;
+            transition: .5s;
+            background-color: rgba(0, 0, 0, .5);
+            color: #fff;
+            border: 6px solid #fff;
+            border-radius: 50%;
+        }
+
+        .petPhoto .img:hover i {
+            opacity: .6;
+        }
+
+        .petPhoto a {
+            text-decoration: none;
+            display: block;
+            width: 300px;
+            height: 50px;
+            background-color: #6592e6;
+            color: #fff;
+            font-size: 26px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 10px;
+            margin: auto;
+        }
+
+        .petPhoto a:hover {
+            background-color: rgb(43, 111, 238);
+        }
+
+        @media screen and (max-width:960px) {
+            .petPhoto .img {
+                width: 40%;
+                margin: 5%;
+            }
+        }
+
+        @media screen and (max-width:768px) {
+            .petPhoto .img {
+                width: 90%;
+                margin: 5%;
+            }
+        }
+
+        .fullScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin: auto;
+            width: 100%;
+            height: 100vh;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        .fullScreen .carouselPet {
+            position: absolute;
+            width: 100%;
+            right: 0;
+            left: 0;
+            top: 50px;
+            bottom: 50px;
+        }
+
+        .fullScreen .close {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 2em;
+            background-color: rgba(100, 100, 100, .6);
+            color: white;
+            position: absolute;
+            right: 50px;
+            top: 50px;
+            margin: auto;
+            z-index: 1;
+        }
+
+        .fullScreen .close:hover {
+            background-color: rgba(0, 0, 0, .6);
+            cursor: pointer;
+        }
+    </style>
+    <style>
+        .commodity {
+            width: 80%;
+            margin: auto;
+        }
+
+        .commodity h1 {
+            text-align: center;
+        }
+
+        .commodity .items {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .commodity .item {
+            width: 22.5%;
+            margin: 1%;
+            margin-bottom: 50px;
+        }
+
+        .commodity .pic img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .commodity .txt {
+            padding-right: 30px;
+        }
+
+        .commodity span {
+            font-size: 16px;
+            font-weight: 500;
+
+        }
+
+        .commodity a {
+            display: block;
+            width: 300px;
+            height: 50px;
+            background-color: #6592e6;
+            color: #fff;
+            font-size: 26px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 10px;
+            margin: auto;
+        }
+
+        .commodity a:hover {
+            background-color: rgb(43, 111, 238);
+        }
+
+        @media screen and (max-width:960px) {
+            .commodity .item {
+                width: 45%;
+                margin: 2.5%;
+                margin-bottom: 50px;
+            }
+        }
+
+        @media screen and (max-width:768px) {
+            .commodity .item {
+                width: 90%;
+                margin: auto;
+                margin-bottom: 50px;
+            }
+        }
+    </style>
+    <!-- 
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;700;900&display=swap" rel="stylesheet">
+font-family: 'Noto Sans TC', sans-serif;
+
+https://picsum.photos/300/300?random=1
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ -->
+
+</head>
+
+<body onload="">
+    <div class="nav"></div>
+
+    <header>
+        <div class="headerImg"><img src="images/dog00.jpg"></div>
+        <div class="txt">
+            <h1>家人不該被丟棄</h1>
+            <p>世界的每個角落有著許多流浪的毛小孩<br>
+                他們正在四處努力的生存著<br>
+                現在，他們等著你來拯救</p>
+            <a href="">為自己找一名家人</a>
+        </div>
+    </header>
+
+
+    <div class="carouselPet">
+        <div class="img active">
+            <img src="https://cdn.pixabay.com/photo/2016/02/26/16/32/bulldog-1224267__340.jpg">
+            <div class="txt">
+                <h2>狗狗1</h2>
+                <p>你好，我是狗狗1</p>
+            </div>
+        </div>
+        <div class="img">
+            <img src="https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__340.jpg">
+            <div class="txt">
+                <h2>狗狗2</h2>
+                <p>你好，我是狗狗2</p>
+            </div>
+        </div>
+        <div class="img">
+            <img src="https://cdn.pixabay.com/photo/2016/02/18/18/37/puppy-1207816__340.jpg">
+            <div class="txt">
+                <h2>狗狗3</h2>
+                <p>你好，我是狗狗3</p>
+            </div>
+        </div>
+
+        <div class="span">
+            <span class="active"></span><span></span><span></span>
+        </div>
+        <div class="prev">﹤</div>
+        <div class="next">﹥</div>
+    </div>
+
+    <div class="petPhoto">
+        <div class="imgBox">
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077__340.jpg">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2017/09/25/13/12/cocker-spaniel-2785074__340.jpg">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2016/02/11/17/00/dog-1194087__340.jpg">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277417__340.jpg">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649__340.jpg">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2019/11/07/08/40/puppy-4608266__340.jpg">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+        <a href="lookForFamily.php">尋找其他寵物</a>
+    </div>
+
+    <div class="fullScreen">
+        <div class="close">✕</div>
+        <div class="carouselPet">
+            <div class="img active">
+                <img src="https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077__340.jpg">
+                <div class="txt">
+                    <h2>小毛</h2>
+                    <p>你好，我是小毛</p>
+                </div>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2017/09/25/13/12/cocker-spaniel-2785074__340.jpg">
+                <div class="txt">
+                    <h2>小毛2</h2>
+                    <p>你好，我是小毛2</p>
+                </div>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2016/02/11/17/00/dog-1194087__340.jpg">
+                <div class="txt">
+                    <h2>小毛3</h2>
+                    <p>你好，我是小毛3</p>
+                </div>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277417__340.jpg">
+                <div class="txt">
+                    <h2>小毛4</h2>
+                    <p>你好，我是小毛4</p>
+                </div>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649__340.jpg">
+                <div class="txt">
+                    <h2>小毛5</h2>
+                    <p>你好，我是小毛5</p>
+                </div>
+            </div>
+            <div class="img">
+                <img src="https://cdn.pixabay.com/photo/2019/11/07/08/40/puppy-4608266__340.jpg">
+                <div class="txt">
+                    <h2>小毛6</h2>
+                    <p>你好，我是小毛6</p>
+                </div>
+            </div>
+
+            <div class="span">
+                <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="prev">﹤</div>
+            <div class="next">﹥</div>
+        </div>
+    </div>
+
+    <div class="commodity">
+        <h1>寵物商品熱賣商品</h1>
+        <div class="items">
+            <div class="item">
+                <div class="pic"><img
+                        src="https://img.my-best.tw/press_component/images/3f6e51a1e6def351492d04ad3a4423ad.jpg?ixlib=rails-4.2.0&q=70&lossless=0&w=690&fit=max"
+                        alt=""></div>
+                <div class="txt">
+                    <h2>寵物潔牙骨<span>202$</span></h2>
+                    <p>●可塞入點心零食 <br>
+                        ●自動充填-咬嚼時零食會從儲存格掉進啞呤兩端，學習運用上下顎、牙齒和牙齦<br>
+                        ●零食儲存格透明設計<br>
+                        ●耐咬、安全、食品級TPR&天然橡膠製成(附檢測合格報告)<br>
+                        ●可拆開清洗</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pic"><img
+                        src="https://shoplineimg.com/5a9798010e64fe18aa00031c/5f9ece618114773acb9626b2/800x.webp?source_format=jpg"
+                        alt=""></div>
+                <div class="txt">
+                    <h2>寵物餵食機<span>2950$</span></h2>
+                    <p>●大容量設計，可存放約2.7kg飼料。<br>
+                        ●雙重保鮮技術，矽膠密封圈出糧口，防止氧化。<br>
+                        ●精準糧食重量檢測，糧食不足、斷電通知。<br>
+                        ●占地僅0.053㎡，比A4紙還小<br>
+                        ●內置緊急供電系統，斷電仍可維持正常出糧</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pic"><img src="https://cdn01.pinkoi.com/product/SFz2VF3X/0/3/640x530.jpg" alt=""></div>
+                <div class="txt">
+                    <h2>寵物項圈<span>800$</span></h2>
+                    <p>
+                        ●高級義大利植鞣皮 <br>
+                        ●堅固耐用，兼顧時尚<br>
+                        ●項圈邊緣表面柔滑<br>
+                        ●兼顧舒適及講究材質<br>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pic"><img
+                        src="https://shoplineimg.com/5c3d9c1441668400010ea4b0/618de2b58460a6001a356142/800x.webp?source_format=jpg"
+                        alt=""></div>
+                <div class="txt">
+                    <h2>加高寵物圍欄<span>1999$</span></h2>
+                    <p>●超大自由空間 <br>
+                        ●加高圍欄，防止毛孩越獄<br>
+                        ●環保高溫烤漆 <br>
+                        ●變換多種外型 </p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pic"><img
+                        src="https://online.carrefour.com.tw/on/demandware.static/-/Sites-carrefour-tw-m-inner/default/dw2126d974/images/large/0279691_-.png"
+                        alt=""></div>
+                <div class="txt">
+                    <h2>狗乾糧<span>459$</span></h2>
+                    <p>●牛肉口味<br>
+                        ●飼糧纖維，有助排便順暢<br>
+                        ●飼料呈食材原色<br>
+                        ●添加維生素及礦物質<br>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pic"><img
+                        src="https://diz36nn4q02zr.cloudfront.net/webapi/imagesV3/Original/SalePage/4483061/0/637891556417230000?v=1"
+                        alt=""></div>
+                <div class="txt">
+                    <h2>寵物飲水機<span>198$</span></h2>
+                    <p>●可黏貼於任何光滑表面，如牆壁、玻璃、瓷磚、壓克力、大理石、不銹鋼、拋光木板等，穩固不掉落<br>
+                        ●無痕膠片可清洗後重覆黏貼<br>
+                        ●本產品使用之黏膠經SGS測試，並符合歐盟標準<br>
+                        ●易上易取，方便清洗<br>
+                        ●小型犬貓適用</p>
+                </div>
+            </div>
+        </div>
+        <div class="btn"><a href="petShop.php">查看更多商品</a></div>
+    </div>
+
+    <div class="footer"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4998ce33ce.js" crossorigin="anonymous"></script>
+    <script>
+        cp01(), cp02(), header()
+        //header圖片滾動效果----------------------------------------------------
+        function header() {
+            document.getElementsByClassName('headerImg')[0].style.height = 500 - document.documentElement.scrollTop + 'px';
+            if (500 - document.documentElement.scrollTop <= 0) {
+                document.getElementsByClassName('headerImg')[0].style.height = '0px';
+            }
+            window.addEventListener('scroll', header)
+        }
+
+        //第一輪播圖片------------------------------------------------------------      
+        function cp01() {
+            //輪播圖片物件
+            var carouselPet = document.getElementsByClassName('carouselPet')[0];
+            var imgH = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('active')[0];
+            var divImg = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('img');
+            var spans = document.getElementsByClassName('carouselPet')[0].getElementsByTagName('span');
+            var prev = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('prev')[0];
+            var next = document.getElementsByClassName('carouselPet')[0].getElementsByClassName('next')[0];
+            //輪播圖片高度
+            var x = imgH.clientWidth;
+            carouselPet.style.height = x * 5 / 8 + 'px';
+            function carouselPetImg() {
+                x = imgH.clientWidth;
+                carouselPet.style.height = x * 5 / 8 + 'px';
+            }
+            window.addEventListener('resize', carouselPetImg);
+
+
+            //點擊圓點更換圖片
+            for (i = 0; i < divImg.length; i++) {
+                spans[i].index = i;
+                divImg[i].index = i;
+                spans[i].onclick = function () {
+                    for (j = 0; j < spans.length; j++) {
+                        if (divImg[j].index < this.index && divImg[j].className != 'img active') {
+                            divImg[j].className = 'img left';
+                        } else if (divImg[j].index > this.index && divImg[j].className != 'img active') {
+                            divImg[j].className = 'img';
+                        } else if (divImg[j].index < this.index) {
+                            divImg[j].className = 'img left2';
+                        } else if (divImg[j].index > this.index) {
+                            divImg[j].className = 'img right';
+                        }
+                        spans[j].className = '';
+                    }
+                    var num = this.index;
+                    divImg[num].className = 'img active';
+                    spans[num].className = 'active';
+                }
+            }
+
+            //點擊左右更換圖片
+            next.onclick = function nextClick() {
+                next.onclick = '';
+                for (i = 0; i < spans.length; i++) {
+                    if (spans[i].className == 'active') {
+                        if (i >= spans.length - 1) {
+                            divImg[0].className = 'img';
+                            setTimeout(function () {
+                                divImg[0].classList.add('active');
+                            }, 0);
+                            divImg[divImg.length - 1].className = 'img left2';
+                            spans[spans.length - 1].className = '';
+                            spans[0].className = 'active';
+                            setTimeout(function () { spans[0].click(); }, 600);
+                        } else {
+                            spans[i + 1].onclick();
+                            i++;
+                        }
+                    }
+                }
+
+                setTimeout(function () {
+                    next.onclick = nextClick;
+                }, 600)
+
+            }
+
+            prev.onclick = function prevClick() {
+                prev.onclick = '';
+                for (i = spans.length - 1; i > -1; i--) {
+                    if (spans[i].className == 'active') {
+                        if (i == 0) {
+                            divImg[0].className = 'img right';
+                            divImg[divImg.length - 1].className = 'img left';
+                            setTimeout(function () { divImg[divImg.length - 1].className = 'img active'; }, 0)
+                            spans[0].className = '';
+                            spans[spans.length - 1].className = 'active';
+                            setTimeout(function () { spans[spans.length - 1].click(); }, 600);
+                        } else {
+                            spans[i - 1].onclick();
+                            i--;
+                        }
+                    }
+                }
+                setTimeout(function () {
+                    prev.onclick = prevClick;
+                }, 600)
+            }
+
+            //自動輪播效果
+            function autocCarouselPet() {
+                next.click();
+            }
+            var autoCarousel = setInterval(autocCarouselPet, 3000);
+            carouselPet.onmouseover = function () {
+                clearInterval(autoCarousel);
+            }
+            carouselPet.onmouseout = function () {
+                autoCarousel = setInterval(autocCarouselPet, 3000);
+            }
+        }
+        //全螢幕輪播圖片----------------------------------------------------------
+        function cp02() {
+            var carouselPet = document.getElementsByClassName('carouselPet')[1];
+            var imgH = document.getElementsByClassName('carouselPet')[1].getElementsByClassName('active')[0];
+            var divImg = document.getElementsByClassName('carouselPet')[1].getElementsByClassName('img');
+            var spans = document.getElementsByClassName('carouselPet')[1].getElementsByTagName('span');
+            var prev = document.getElementsByClassName('carouselPet')[1].getElementsByClassName('prev')[0];
+            var next = document.getElementsByClassName('carouselPet')[1].getElementsByClassName('next')[0];
+            var fullScreen = document.getElementsByClassName('fullScreen')[0];
+            var close = fullScreen.getElementsByClassName('close')[0];
+            var fullImg = document.getElementsByClassName('petPhoto')[0].getElementsByClassName('imgBox')[0].getElementsByClassName('img');
+
+            for (i = 0; i < fullImg.length; i++) {
+                fullImg[i].index = i;
+                fullImg[i].onclick = function () {
+                    var index = this.index;
+                    spans[index].onclick();
+                    fullScreen.style.display = 'block';
+                    x = imgH.clientHeight;
+                    carouselPet.style.height = x + 'px';
+                }
+            }
+
+            //關閉輪播圖片
+            close.onclick = function () {
+                fullScreen.style.display = 'none';
+            }
+
+            //點擊圓點更換圖片
+            for (i = 0; i < divImg.length; i++) {
+                spans[i].index = i;
+                divImg[i].index = i;
+                spans[i].onclick = function () {
+                    for (j = 0; j < spans.length; j++) {
+                        if (divImg[j].index < this.index && divImg[j].className != 'img active') {
+                            divImg[j].className = 'img left';
+                        } else if (divImg[j].index > this.index && divImg[j].className != 'img active') {
+                            divImg[j].className = 'img';
+                        } else if (divImg[j].index < this.index) {
+                            divImg[j].className = 'img left2';
+                        } else if (divImg[j].index > this.index) {
+                            divImg[j].className = 'img right';
+                        }
+                        spans[j].className = '';
+                    }
+                    var num = this.index;
+                    divImg[num].className = 'img active';
+                    spans[num].className = 'active';
+                }
+            }
+
+            //點擊左右更換圖片
+            next.onclick = function nextClick() {
+                next.onclick = '';
+                for (i = 0; i < spans.length; i++) {
+                    if (spans[i].className == 'active') {
+                        if (i >= spans.length - 1) {
+                            divImg[0].className = 'img';
+                            setTimeout(function () {
+                                divImg[0].classList.add('active');
+                            }, 0);
+                            divImg[divImg.length - 1].className = 'img left2';
+                            spans[spans.length - 1].className = '';
+                            spans[0].className = 'active';
+                            setTimeout(function () { spans[0].click(); }, 600);
+                        } else {
+                            spans[i + 1].onclick();
+                            i++;
+                        }
+                    }
+                }
+
+                setTimeout(function () {
+                    next.onclick = nextClick;
+                }, 600)
+
+            }
+
+            prev.onclick = function prevClick() {
+                prev.onclick = '';
+                for (i = spans.length - 1; i > -1; i--) {
+                    if (spans[i].className == 'active') {
+                        if (i == 0) {
+                            divImg[0].className = 'img right';
+                            divImg[divImg.length - 1].className = 'img left';
+                            setTimeout(function () { divImg[divImg.length - 1].className = 'img active'; }, 0)
+                            spans[0].className = '';
+                            spans[spans.length - 1].className = 'active';
+                            setTimeout(function () { spans[spans.length - 1].click(); }, 600);
+                        } else {
+                            spans[i - 1].onclick();
+                            i--;
+                        }
+                    }
+                }
+                setTimeout(function () {
+                    prev.onclick = prevClick;
+                }, 600)
+            }
+        }
+
+        //加入共用導覽列和頁尾------------------------------------------------------------
+        $(".nav").load("nav.html");
+        $(".footer").load("footer.html");
+
+    </script>
+</body>
+
+</html>

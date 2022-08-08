@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加入我們</title>
+    <link rel="icon" href="images/標題icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/nav.css">
+    <style>
+        .joinUs {
+            width: 90%;
+            margin: auto;
+        }
+
+        .joinUs .item {
+            display: flex;
+            align-items: center;
+            margin-top: 50px;
+            line-height: 40px;
+        }
+
+        .joinUs .pic {
+            width: 40%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .joinUs img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .joinUs .txt {
+            padding: 50px;
+            text-align: left;
+            width: 60%;
+        }
+
+        .joinUs .txtr {
+            padding: 50px;
+            text-align: right;
+            width: 60%;
+        }
+
+        .joinUs a {
+            display: inline;
+            border: none;
+            font-size: 20px;
+            background-color: #6592e6;
+            border-radius: 5px;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .joinUs a:hover {
+            background-color: #4686ff;
+        }
+        @media screen and (max-width:768px) {
+            .joinUs .item{
+                flex-wrap: wrap;
+                line-height: 30px;
+            }
+            .joinUs .pic,
+            .joinUs .txt,
+            .joinUs .txtr{
+                width: 100%;
+            }
+            .joinUs .txt,
+            .joinUs .txtr{
+                padding: 5px;
+            }
+            .joinUs .txtr{
+                order: 2;
+                text-align:left;
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav"></div>
+
+    <div class="joinUs">
+        <div class="item">
+            <div class="pic"><img src="images/dog00.jpg" alt=""></div>
+            <div class="txt">
+                <h2>愛心捐款</h2>
+                <p>感謝您的捐款，每一分錢我們將會妥善運用在各處流浪的動物
+                </p>
+                <div class="btn"><a href="https://taeanimal.org.tw/donation_projects.php" target="_blank">愛心捐款連結</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="txtr">
+                <h2>成為志工</h2>
+                <p>並不是只有捐款能幫助他們，歡迎您加入我們的行列
+                </p>
+                <div class="btn"><a href="https://taeanimal.org.tw/volunteer.php" target="_blank">報名志工行列</a></div>
+            </div>
+            <div class="pic"><img src="images/img01.jpg" alt=""></div>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4998ce33ce.js" crossorigin="anonymous"></script>
+    <script>
+        //加入共用導覽列和頁尾------------------------------------------------------------
+        $(".nav").load("nav.html");
+        $(".footer").load("footer.html");
+    </script>
+</body>
+
+</html>
