@@ -1,5 +1,5 @@
 # 作品練習-寵物之家
 
-大部排版與輪播圖片使用CSS與JavaScript製作而成 <br>
+大部排版與輪播圖片使用CSS與JavaScript製作而成,有RWD設計<br>
 使用JQuery在每一頁導入導覽頁與頁尾<br>
 使用簡單的PHP連接後端資料庫,有新增修改刪除功能<br>
